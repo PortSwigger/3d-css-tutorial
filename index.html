@@ -1,0 +1,72 @@
+<!doctype HTML>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>3D world in CSS</title>
+        <style>
+            body {
+                background-color: #000;
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 40px;
+                perspective: 10em;
+                perspective-origin: 50% calc(50% - 2em);                           
+                overflow: hidden;     
+            }
+
+            .scene {
+               position: relative;
+               transform-style: preserve-3d;
+            }
+
+            .frontWall, .leftWall, .rightWall {
+                position: absolute;
+                background-color: #222297;                
+                background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #222297 17px ), repeating-linear-gradient( #03076055, #030760 );
+                width: 20em;
+                height: 20em;
+                top: -16em;
+                left:-10em;
+                transform: translateZ(-10em);
+            }
+
+            .leftWall {                
+                left:-20em;
+                transform: rotateY(-90deg);
+            }
+
+            .rightWall {                
+                transform: rotateY(90deg);
+                left:0;
+            }
+
+            .floor {
+                background-color: #222297;            
+                background-image:  linear-gradient(135deg, #ffffff 25%, transparent 25%), linear-gradient(225deg, #ffffff 25%, transparent 25%), linear-gradient(45deg, #ffffff 25%, transparent 25%), linear-gradient(315deg, #ffffff 25%, #222297 25%);
+                background-position:  17px 0, 17px 0, 0 0, 0 0;
+                background-size: 17px 17px;
+                background-repeat: repeat;
+                width: 20em;
+                height: 20em;
+                top: 1em;
+                z-index: 0;
+                position: absolute;
+                transform: 
+                    translate(-50%, -50%)
+                    rotateX(90deg)
+                    translateZ(-3em);
+            }
+        </style>            
+    </head>
+    <body>
+        <div class="scene">
+            <div class="ceiling"></div>
+            <div class="frontWall"></div>
+            <div class="leftWall"></div>
+            <div class="rightWall"></div>
+            <div class="floor"></div>
+        </div>
+    </body>
+</html>
