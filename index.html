@@ -21,7 +21,7 @@
                transform-style: preserve-3d;
             }
 
-            .frontWall, .leftWall, .rightWall {
+            .ceiling, .frontWall, .leftWall, .rightWall {
                 position: absolute;
                 background-color: #222297;                
                 background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #222297 17px ), repeating-linear-gradient( #03076055, #030760 );
@@ -43,10 +43,10 @@
             }
 
             .floor {
-                background-color: #222297;            
-                background-image:  linear-gradient(135deg, #ffffff 25%, transparent 25%), linear-gradient(225deg, #ffffff 25%, transparent 25%), linear-gradient(45deg, #ffffff 25%, transparent 25%), linear-gradient(315deg, #ffffff 25%, #222297 25%);
-                background-position:  17px 0, 17px 0, 0 0, 0 0;
-                background-size: 17px 17px;
+                background-color: #000;            
+                background-image:  linear-gradient(135deg, #ffffff 25%, transparent 25%), linear-gradient(225deg, #ffffff 25%, transparent 25%), linear-gradient(45deg, #ffffff 25%, transparent 25%), linear-gradient(315deg, #ffffff 25%, #000 25%);
+                background-position:  1em 0, 1em 0, 0 0, 0 0;
+                background-size: 1em 1em;
                 background-repeat: repeat;
                 width: 20em;
                 height: 20em;
@@ -54,10 +54,26 @@
                 z-index: 0;
                 position: absolute;
                 transform: 
-                    translate(-50%, -50%)
-                    rotateX(90deg)
-                    translateZ(-3em);
+                translate(-50%, -50%)
+                rotateX(90deg)
+                translateZ(-3em);
             }
+
+            .ceiling {
+                background-color: #0a0a5c;                
+                background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #222297 17px ), repeating-linear-gradient( #03076055, #030760 );
+                top:0;
+                left:0;
+                transform: 
+                translate(-50%, -50%)
+                rotateX(90deg)
+                translateZ(15em);
+            }
+
+            .frontWall {
+                clip-path: polygon(0% 0%, 0% 100%, 33% 100%, 33% 39%, 67% 39%, 68% 100%, 33% 100%, 33% 100%, 100% 100%, 100% 0%);
+            }
+
         </style>            
     </head>
     <body>
