@@ -54,19 +54,26 @@
                 z-index: 0;
                 position: absolute;
                 transform: 
-                    translate(-50%, -50%)
-                    rotateX(90deg)
-                    translateZ(-3em);
+                translate(-50%, -50%)
+                rotateX(90deg)
+                translateZ(-3em);
             }
 
             .ceiling {
+                background-color: #0a0a5c;                
+                background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #222297 17px ), repeating-linear-gradient( #03076055, #030760 );
                 top:0;
                 left:0;
                 transform: 
-                    translate(-50%, -50%)
-                    rotateX(90deg)
-                    translateZ(15em);
+                translate(-50%, -50%)
+                rotateX(90deg)
+                translateZ(15em);
             }
+
+            .frontWall {
+                clip-path: polygon(0% 0%, 0% 100%, 33% 100%, 33% 39%, 67% 39%, 68% 100%, 33% 100%, 33% 100%, 100% 100%, 100% 0%);
+            }
+
         </style>            
     </head>
     <body>
