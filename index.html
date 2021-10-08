@@ -4,6 +4,11 @@
         <meta charset="UTF-8" />
         <title>3D world in CSS</title>
         <style>
+            :root {
+                --turnSpeed: 40s;
+                --speed: 300s;
+            }
+
             body {
                 background-color: #000;
                 min-height: 100vh;
@@ -19,7 +24,30 @@
             .scene {
                position: relative;
                transform-style: preserve-3d;
+                animation: 
+                    sceneRotateLeft var(--turnSpeed) infinite linear, 
+                    sceneRotateRight var(--turnSpeed) infinite linear,
+                    sceneMoveForward var(--speed) infinite linear,
+                    sceneMoveBack var(--speed) infinite linear;
+                animation-play-state: paused, paused, paused, paused;
             }
+
+            @keyframes sceneRotateLeft {
+                to { transform: rotateY(-360deg); }
+            }
+            
+            @keyframes sceneRotateRight {
+                to { transform: rotateY(360deg); }
+            }
+            
+            @keyframes sceneMoveForward {
+                to { transform: translateZ(1000em); }
+            }
+            
+            @keyframes sceneMoveBack {
+                to { transform: translateZ(-1000em); }
+            }
+
 
             .ceiling, .frontWall, .leftWall, .rightWall {
                 position: absolute;
@@ -74,9 +102,91 @@
                 clip-path: polygon(0% 0%, 0% 100%, 33% 100%, 33% 39%, 67% 39%, 68% 100%, 33% 100%, 33% 100%, 100% 100%, 100% 0%);
             }
 
+            :target.turnLeft ~ .scene, #turnLeft:focus ~ .scene {
+                animation-play-state: running, paused, paused, paused;
+            }
+                
+            :target.turnRight ~ .scene, #turnRight:focus ~ .scene {
+                animation-play-state: paused, running, paused, paused;
+            }
+                
+            :target.moveBack ~ .scene, #moveBack:focus ~ .scene {
+                animation-play-state: paused, paused, paused, running;
+            }
+                
+            :target.moveForward ~ .scene, #moveForward:focus ~ .scene {
+                animation-play-state: paused, paused, running, paused;
+            }
+
+            #moveForward, #turnLeft, #stop, #turnRight, #moveBack {
+                position: absolute;
+                left: -5000px;
+                top:-5000px;
+            }
+
+            #controls {
+                position: fixed;                 
+                z-index: 100;
+                width: 5em;
+                bottom: 2em;
+                margin-left:-2.5em;
+                left:50%;
+                font-size: 5vmin;
+            }
+
+
+            /*Safari only hack*/
+            @supports (-webkit-backdrop-filter: blur(1px)) {
+                #controls {
+                    top: 40%;
+                }
+            }
+
+            .flex-grid {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .col {
+                width: 32%;
+                text-align: center;
+            }
+            
+            #controls a:link, #controls a:visited {
+                text-decoration: none;
+                color:rgb(250, 255, 0);
+                text-shadow: 2px 2px #000;
+            }
         </style>            
     </head>
     <body>
+
+        <div id="controls">
+            <div class="flex-grid">
+               <div class="col"></div>
+               <div class="col"><a href="#moveForward">&uarr;</a></div>
+               <div class="col"></div>
+            </div>
+            <div class="flex-grid">
+               <div class="col"><a href="#turnLeft">&larr;</a></div>
+               <div class="col"><a href="#stop">&bull;</a></div>
+               <div class="col"><a  href="#turnRight">&rarr;</a></div>
+            </div>
+            <div class="flex-grid">
+               <div class="col"></div>
+               <div class="col"><a href="#moveBack">&darr;</a></div>
+               <div class="col"></div>
+            </div>
+         </div>
+
+        <a tabindex="1" accesskey="W" class="moveForward" id="moveForward" href="#moveForward" ></a>
+        <a tabindex="2" accesskey="A" class="turnLeft" id="turnLeft" href="#turnLeft"></a>
+        <a tabindex="5" accesskey="X" class="stop" id="stop" href="#stop"></a>
+        <a tabindex="3" accesskey="D" class="turnRight" id="turnRight" href="#turnRight"></a>
+        <a tabindex="4" accesskey="S" class="moveBack" id="moveBack" href="#moveBack"></a>        
+
         <div class="scene">
             <div class="ceiling"></div>
             <div class="frontWall"></div>
